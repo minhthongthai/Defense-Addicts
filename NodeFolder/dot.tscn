@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2k1845v3isjv"]
+
+[ext_resource type="Script" path="res://NodeFolder/dot.gd" id="1_ne2h4"]
+[ext_resource type="Texture2D" uid="uid://c25ox5v35s0vq" path="res://Textures/MagicBall.png" id="2_namt2"]
+
+[node name="Dot" type="Area2D"]
+scale = Vector2(0.390416, 0.390416)
+script = ExtResource("1_ne2h4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(1.44341, 1.44341)
+texture = ExtResource("2_namt2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(1.44341, 1.44341)
+polygon = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
