@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwbd3b3l0wqjf"]
+
+[ext_resource type="Script" path="res://NodeFolder/MagicGuy.gd" id="1_qq4u1"]
+[ext_resource type="Texture2D" uid="uid://cxsj36g1m02ni" path="res://Textures/BowerGuy.png" id="2_bdnsg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hft5t"]
+radius = 388.278
+
+[sub_resource type="Animation" id="Animation_rimm1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5j54q"]
+resource_name = "RotationBack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_irjk2"]
+_data = {
+"RESET": SubResource("Animation_rimm1"),
+"RotationBack": SubResource("Animation_5j54q")
+}
+
+[node name="MagicGuy" type="Area2D"]
+position = Vector2(-41, 288)
+script = ExtResource("1_qq4u1")
+
+[node name="Muzzle2D" type="Marker2D" parent="."]
+position = Vector2(21, 0)
+scale = Vector2(0.365436, 0.365436)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(1.19052, -1.19052)
+texture = ExtResource("2_bdnsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+texture_filter = 1
+scale = Vector2(0.365436, 0.365436)
+shape = SubResource("CircleShape2D_hft5t")
+
+[node name="AnimationMagic" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_irjk2")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://48fkjlq8lhea"]
+
+[ext_resource type="Texture2D" uid="uid://cytm81jt1n3ol" path="res://Textures/Redger.png" id="1_8rn4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ohml"]
+size = Vector2(68, 65)
+
+[sub_resource type="Animation" id="Animation_sjtno"]
+resource_name = "RedgerWalking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.256, 1.256), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_36f55"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tb4q5"]
+_data = {
+"RESET": SubResource("Animation_36f55"),
+"RedgerWalking": SubResource("Animation_sjtno")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.15625, 2.0625)
+texture = ExtResource("1_8rn4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+shape = SubResource("RectangleShape2D_7ohml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RedgerWalking"
+libraries = {
+"": SubResource("AnimationLibrary_tb4q5")
+}
